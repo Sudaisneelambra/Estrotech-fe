@@ -1,0 +1,28 @@
+<!-- main login -->
+<div class="main h-screen w-full flex justify-center items-center bg-[#193624]">
+
+  <form class="login-form bg-white">
+    <h1 class="login-title text-[30px] font-bold text-[#d42525bb]">LOGIN</h1>
+    <div class="w-full flex flex-col items-center">
+      <app-input
+        [placeholder]="'Enter email'"
+        [label]="'Email'"
+        [type]="'string'"
+        [Input_width]="'500px'"
+        (dataChange)="onEmailChange($event)"
+      >
+      </app-input>
+      <app-input
+        [placeholder]="'Enter Password'"
+        [label]="'Password'"
+        [type]="'password'"
+        [Input_width]="'500px'"
+        (dataChange)="onPasswordChange($event)"
+      >
+      </app-input>
+      <app-button [buttonStyles]="buttonStyles" (click)="onSubmit()"
+        >Login</app-button
+      >
+    </div>
+  </form>
+</div>

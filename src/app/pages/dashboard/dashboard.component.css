@@ -1,0 +1,36 @@
+section {
+    height: calc(100vh - 122px);
+    display: flex;
+}
+
+.side-bar{
+    position: absolute;
+    /* transform: translateX(-100%); */
+    /* transition: .3s ease-in; */
+    background-color: red;
+}
+
+.hidden-side-bar{
+    /* transform: translateX(0%); */
+    transition: .3s ease-in;
+    background-color: red;
+}
+
+/* .right-home{
+    width: 100%;
+} */
+
+/* .hide-right-home{
+    min-width: 100%;
+} */
+
+@media(max-width:700px){
+    .side-bar{
+        position: absolute;
+        transform: translateX(0%);
+    }
+    .hidden-side-bar{
+        transform: translateX(0%);
+        transition: .3s ease-in;
+    }
+}

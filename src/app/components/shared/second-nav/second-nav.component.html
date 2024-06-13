@@ -1,0 +1,8 @@
+<nav class="second-nav w-full  h-[60px] sm:px-10 px-[25px] flex items-center gap-3 border-b-[1px] border-[#c9c7c7]">
+    <i class="fa-solid fa-bars text-[25px]" (click)="handleClick()"></i>
+    <h1 class="route text-[25px] font-normal ml-[8px]">{{Route | capitalize}}</h1>
+    <ng-container *ngIf="RouteSegments.length > 1">
+        <i class="right-arrow fa-solid fa-angle-right text-[25px]" ></i>
+        <h1 class="route text-[25px] font-normal ml-[8px]">{{ RouteSegments[1] | capitalize }}</h1>
+    </ng-container>
+</nav>

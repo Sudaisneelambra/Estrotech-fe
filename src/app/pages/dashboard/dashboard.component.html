@@ -1,0 +1,10 @@
+<app-navbar></app-navbar>
+<app-second-nav [Route]="currentRoute" (booleanValue)="booleanEvent($event)"></app-second-nav>
+<section class="flex-grow w-full flex h-full relative">
+  <div class="side-bar min-w-[300px] top-0 right-0 bg-[#fbf7fa] border-r-[1px] border-[#c9c7c7]" ></div>
+  <div class=" border-2 border-red-500" ></div>
+</section>
+
+
+<!-- [ngClass]="!hiddenValue ? 'side-bar' : 'hidden-side-bar'" -->
+<!-- [ngClass]="!hiddenValue ? 'hide-right-home' : 'right-home'" -->

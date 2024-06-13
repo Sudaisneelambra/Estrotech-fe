@@ -1,0 +1,7 @@
+@media(max-width:400px){
+    .nav-bar{
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+

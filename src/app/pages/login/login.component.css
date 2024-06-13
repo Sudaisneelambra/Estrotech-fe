@@ -1,0 +1,18 @@
+.login-form{
+    width: 600px;
+    height: 400px;
+    box-shadow: 1px 1px 15px 1px gainsboro;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+@media(max-width:650px){
+    .login-form{
+        width: 90%;
+    }
+}
+
