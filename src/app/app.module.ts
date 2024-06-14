@@ -12,11 +12,16 @@ import { ButtonComponent } from './components/shared/button/button.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { SecondNavComponent } from './components/shared/second-nav/second-nav.component';
 import { CapitalizePipe } from './pipes/capitalize.pipe';
+import { SideBarComponent } from './components/shared/side-bar/side-bar.component';
+import { DevicesComponent } from './pages/devices/devices.component';
+import { HomeComponent } from './pages/home/home.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
+import {HttpClientModule} from '@angular/common/http'
 
 
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, DashboardComponent],
+  declarations: [AppComponent, LoginComponent, DashboardComponent, SideBarComponent, DevicesComponent, HomeComponent, NotFoundComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -27,7 +32,8 @@ import { CapitalizePipe } from './pipes/capitalize.pipe';
     ReactiveFormsModule,
     NavbarComponent,
     SecondNavComponent,
-    CapitalizePipe
+    CapitalizePipe,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],

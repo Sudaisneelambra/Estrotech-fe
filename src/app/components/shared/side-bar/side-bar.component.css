@@ -1,0 +1,18 @@
+.side-bar{
+    position: absolute;
+    transform: translateX(-100%);
+    transition: .3s ease-in;
+    height: calc(100vh - 122px);
+}
+
+.hidden-side-bar{
+    transform: translateX(0%);
+    transition: .3s ease-in;
+}
+
+
+@media(max-width:350px){
+    .side-bar{
+       width: 100%;
+    }
+}

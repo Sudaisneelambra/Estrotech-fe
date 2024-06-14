@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, DoCheck, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Router } from '@angular/router';
+import { CommonService } from 'src/app/common.service';
 import { CapitalizePipe } from 'src/app/pipes/capitalize.pipe';
 
 @Component({
@@ -9,19 +11,28 @@ import { CapitalizePipe } from 'src/app/pipes/capitalize.pipe';
   standalone:true,
   imports:[CommonModule,CapitalizePipe]
 })
-export class SecondNavComponent {
+export class SecondNavComponent implements OnInit{
 
-  @Input() Route!:string
-  @Output() booleanValue= new EventEmitter()
+  route:any
+  bool:any
+  constructor(private commonService:CommonService){}
 
-  bool:boolean= true
 
-  handleClick(){      
-      this.booleanValue.emit(this.bool)
-      this.bool =!this.bool
+  ngOnInit(): void {
+    this.commonService.routeName.subscribe((val)=>{
+      this.route= val      
+    })
   }
-
-  get RouteSegments() {
-    return this.Route.split('/');
+  
+  handleClick(){    
+    this.commonService.sideBarBoolean.subscribe((val)=>{
+      this.bool = val
+    })
+    
+    if(this.bool){
+      this.commonService.sideBarBoolean.next(false)
+    }else{
+      this.commonService.sideBarBoolean.next(true)
+    }
   }
 }

@@ -27,7 +27,7 @@ export class LoginComponent {
 
   onSubmit() {
     if(this.loginForm.email.trim() !=='' && this.loginForm.password.trim() !=='' ){
-      this.router.navigate(['/dashboard'])
+      this.router.navigate(['/home/dashboard'])
     }else{
       alert('fill the form')
     }

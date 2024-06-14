@@ -1,0 +1,8 @@
+<app-navbar></app-navbar>
+<app-second-nav (booleanValue)="booleanEvent($event)"></app-second-nav>
+<section class=" w-full  relative">
+    <app-side-bar></app-side-bar>
+    <div class="main border-2 border-red-500 w-full " >
+        <router-outlet></router-outlet>
+    </div>
+</section>

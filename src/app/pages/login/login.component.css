@@ -1,7 +1,7 @@
 .login-form{
     width: 600px;
     height: 400px;
-    box-shadow: 1px 1px 15px 1px gainsboro;
+    box-shadow: 1px 1px 8px 1px gainsboro;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;

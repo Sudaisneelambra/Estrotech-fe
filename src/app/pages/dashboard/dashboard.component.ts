@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {  Router } from '@angular/router';
+import { CommonService } from 'src/app/common.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,27 +9,55 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit{
 
-  currentRoute: string = '';
-  
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(private router:Router,private commonService:CommonService){}
 
-  hiddenValue!:boolean
+  currentRoute:any
+  dataOne:Data[]=[]
+  dataTwo:Data[]=[]
 
-  ngOnInit() {
-    this.getCurrentRoute();
+
+  ngOnInit(): void {
+    this.getCurrentRoute()
+    this.getDataOne()
+    this.getDataTwo()
+
   }
 
   getCurrentRoute() {
 
     if(this.router.url){
-      this.currentRoute = this.router.url;
-      this.currentRoute = this.currentRoute.replace('/', '');
+      this.currentRoute = this.router.url.replace('/', '').split('/').filter((segment:any) => segment !== 'home')
+      this.commonService.routeName.next(this.currentRoute)     
     }
-
   }
 
-  booleanEvent(event:any){
-    this.hiddenValue=event
-    console.log(event)
+  getDataOne(){
+    this.commonService.GetData1().subscribe({
+      next:(res)=>{
+        this.dataOne=res
+        console.log(this.dataOne);        
+      },
+      error:(err)=>{
+        console.log(err);
+      }
+    })
   }
+
+  getDataTwo(){
+    this.commonService.GetData1().subscribe({
+      next:(res)=>{
+        this.dataTwo=res
+        console.log(this.dataTwo);        
+      },
+      error:(err)=>{
+        console.log(err);
+      }
+    })
+  }
+
+}
+
+interface Data {
+  hour:number;
+  data:number
 }
