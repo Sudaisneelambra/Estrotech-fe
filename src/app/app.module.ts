@@ -16,12 +16,13 @@ import { SideBarComponent } from './components/shared/side-bar/side-bar.componen
 import { DevicesComponent } from './pages/devices/devices.component';
 import { HomeComponent } from './pages/home/home.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
-import {HttpClientModule} from '@angular/common/http'
+import {HttpClientModule} from '@angular/common/http';
+import { LineChartComponent } from './components/shared/line-chart/line-chart.component'
 
 
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, DashboardComponent, SideBarComponent, DevicesComponent, HomeComponent, NotFoundComponent],
+  declarations: [AppComponent, LoginComponent, DashboardComponent, SideBarComponent, DevicesComponent, HomeComponent, NotFoundComponent, LineChartComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

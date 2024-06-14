@@ -7,17 +7,25 @@
     grid-template-columns: 1fr 1fr 1fr;
 }
 @media(max-width:900px){
-    .first-one,.second-one{
+    .second-one{
+        width: 90%;
+    }
+    .first-one{
         width: 95%;
     }
 }
 
 @media(max-width:720px){
-    .dash-board{
-        height: 100%;
+    .first-one{
+        height: auto;
+        margin-top: 20px;
     }
-   .second-one{
-        width: 95%;
-        grid-template-columns: 1fr 1fr;
+    .dash-board{
+        justify-content: flex-start;
+    }
+    .second-one{
+        display: grid;
+        margin-top: 20px;
+        grid-template-columns: 1fr ;
     }
 }
