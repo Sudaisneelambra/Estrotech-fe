@@ -18,11 +18,13 @@ import { HomeComponent } from './pages/home/home.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import {HttpClientModule} from '@angular/common/http';
 import { LineChartComponent } from './components/shared/line-chart/line-chart.component'
+import { DataPercentComponent } from './components/shared/data-percent/data-percent.component';
+import { DeviceAvailabeComponent } from './components/shared/device-availabe/device-availabe.component';
 
 
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, DashboardComponent, SideBarComponent, DevicesComponent, HomeComponent, NotFoundComponent, LineChartComponent],
+  declarations: [AppComponent, LoginComponent, DashboardComponent, SideBarComponent, DevicesComponent, HomeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -34,7 +36,11 @@ import { LineChartComponent } from './components/shared/line-chart/line-chart.co
     NavbarComponent,
     SecondNavComponent,
     CapitalizePipe,
-    HttpClientModule
+    HttpClientModule,
+    LineChartComponent,
+    NotFoundComponent,
+    DataPercentComponent,
+    DeviceAvailabeComponent
   ],
   providers: [],
   bootstrap: [AppComponent],

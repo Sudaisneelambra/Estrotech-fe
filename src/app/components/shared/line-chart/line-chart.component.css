@@ -1,5 +1,12 @@
 .bg-green-600 {
     width: 100% !important;
     height: 100%;
+}
+
+
+@media(max-width:450px){
+    #myChart{
+        padding: 0;
+    }
 
 }

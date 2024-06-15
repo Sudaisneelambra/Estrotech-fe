@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
@@ -21,4 +21,9 @@ export class CommonService {
     return this.http.get('assets/data/data_1.json')
   }
  
+
+  getdevicedata():Observable<any>{
+    return this.http.get('assets/data/deviceData.json')
+  }
+
 }

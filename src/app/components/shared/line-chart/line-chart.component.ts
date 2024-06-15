@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { forkJoin } from 'rxjs';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { CommonService } from 'src/app/common.service';
 import {Chart, ChartConfiguration, registerables} from 'node_modules/chart.js'
 Chart.register(...registerables)
@@ -7,51 +6,37 @@ Chart.register(...registerables)
 @Component({
   selector: 'app-line-chart',
   templateUrl: './line-chart.component.html',
+  standalone:true,
+  imports:[],
   styleUrls: ['./line-chart.component.css'],
 })
-export class LineChartComponent implements OnInit {
+export class LineChartComponent implements OnInit ,OnChanges{
 
-  dataOne: Data[] = [];
-  dataTwo: Data[] = [];
-  totalData: Data[] = [];
+  @Input() dataOne: Data[] = [];
+  @Input() dataTwo: Data[] = [];
+  @Input() totalData: Data[] = [];
+  private chart: Chart | undefined;
 
   constructor(private commonService:CommonService) {}
 
-  ngOnInit(): void {
-    this.loadData();
-  }
 
-  loadData() {
-    forkJoin({
-      dataOne: this.commonService.GetData1(),
-      dataTwo: this.commonService.GetData2() // Ensure this method exists in your CommonService
-    }).subscribe({
-      next: (res) => {
-        this.dataOne = res.dataOne;
-        this.dataTwo = res.dataTwo;
-        
-        
-        this.calculateTotalData();
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    });
-  }
-
-  calculateTotalData() {
-    if (this.dataOne.length && this.dataTwo.length) {
-      this.totalData = this.dataOne.map((dataOne, index) => ({
-        hour: dataOne.hour,
-        data: dataOne.data + (this.dataTwo[index]?.data || 0) 
-      }));
-      console.log(this.totalData);
+  ngOnChanges(changes: SimpleChanges): void {
+    if(this.dataOne.length>0 && this.dataTwo.length>0 && this.totalData.length>0){
       this.renderChart()
     }
   }
 
+  ngOnInit(): void {
+    
+  }
 
   renderChart(): void {
+
+    const ctxx = document.getElementById('line') as HTMLCanvasElement;
+    if (this.chart) {
+      this.chart.destroy();
+    }
+
     const labels = this.dataOne.map(item => item.hour.toString());
     const data = {
       labels: labels,
@@ -98,6 +83,14 @@ export class LineChartComponent implements OnInit {
       data: data,
       options: {
         responsive: true,
+        plugins:{
+          title:{
+            display: true,
+            text:'Daily trend',
+            align:'start',
+            color: '#333'
+          }
+        },
         scales: {
           x: {
             title: {
@@ -130,13 +123,12 @@ export class LineChartComponent implements OnInit {
               display: true,
               color: 'rgba(200, 200, 200, 0.2)'
             }
-          }
+          },
         }
       }
     };
 
-    const ctx = document.getElementById('myChart') as HTMLCanvasElement;
-    new Chart(ctx, config);
+    new Chart(ctxx, config);
   }
 }
 

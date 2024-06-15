@@ -13,6 +13,11 @@
     .first-one{
         width: 95%;
     }
+    .second-one{
+        display: grid;
+        margin-top: 20px;
+        grid-template-columns: 1fr ;
+    }
 }
 
 @media(max-width:720px){
@@ -23,9 +28,11 @@
     .dash-board{
         justify-content: flex-start;
     }
-    .second-one{
-        display: grid;
-        margin-top: 20px;
-        grid-template-columns: 1fr ;
-    }
+   
+}
+
+
+.data-percent{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr !important;
 }
