@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit{
   dataOne: Data[] = [];
   dataTwo: Data[] = [];
   totalData: Data[] = [];
-  deviceData:any
+  
   percentOne:any
   percentTwo:any
   Totalpercent:any
@@ -27,7 +27,6 @@ export class DashboardComponent implements OnInit{
   ngOnInit(): void {
     this.getCurrentRoute()
     this.loadData();
-    this.getDeviceData()
   }
 
   loadData() {
@@ -83,16 +82,6 @@ export class DashboardComponent implements OnInit{
 
   }
 
-  getDeviceData(){
-    this.commonService.getdevicedata().subscribe({
-      next:(res)=>{
-        this.deviceData = res      
-      },
-      error:(err)=>{
-
-      }
-    })
-  }
   
 }
 

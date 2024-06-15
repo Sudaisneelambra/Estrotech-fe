@@ -2,7 +2,7 @@
     position: absolute;
     transform: translateX(-100%);
     transition: .3s ease-in;
-    height: calc(100vh - 122px);
+    height: 90vh !important;
 }
 
 .hidden-side-bar{

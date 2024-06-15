@@ -17,8 +17,6 @@ export class LineChartComponent implements OnInit ,OnChanges{
   @Input() totalData: Data[] = [];
   private chart: Chart | undefined;
 
-  constructor(private commonService:CommonService) {}
-
 
   ngOnChanges(changes: SimpleChanges): void {
     if(this.dataOne.length>0 && this.dataTwo.length>0 && this.totalData.length>0){
@@ -88,7 +86,10 @@ export class LineChartComponent implements OnInit ,OnChanges{
             display: true,
             text:'Daily trend',
             align:'start',
-            color: '#333'
+            color: '#333',
+            font:{
+              size:10
+            }
           }
         },
         scales: {

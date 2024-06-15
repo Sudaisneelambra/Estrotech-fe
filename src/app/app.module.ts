@@ -20,6 +20,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { LineChartComponent } from './components/shared/line-chart/line-chart.component'
 import { DataPercentComponent } from './components/shared/data-percent/data-percent.component';
 import { DeviceAvailabeComponent } from './components/shared/device-availabe/device-availabe.component';
+import { OfflineDeviceComponent } from './components/shared/offline-device/offline-device.component';
 
 
 
@@ -40,7 +41,8 @@ import { DeviceAvailabeComponent } from './components/shared/device-availabe/dev
     LineChartComponent,
     NotFoundComponent,
     DataPercentComponent,
-    DeviceAvailabeComponent
+    DeviceAvailabeComponent,
+    OfflineDeviceComponent
   ],
   providers: [],
   bootstrap: [AppComponent],

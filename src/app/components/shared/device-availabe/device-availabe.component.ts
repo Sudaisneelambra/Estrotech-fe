@@ -1,6 +1,7 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {Chart, ChartConfiguration, registerables} from 'node_modules/chart.js'
+import { CommonService } from 'src/app/common.service';
 Chart.register(...registerables)
 
 @Component({
@@ -10,16 +11,31 @@ Chart.register(...registerables)
   templateUrl: './device-availabe.component.html',
   styleUrls: ['./device-availabe.component.css']
 })
-export class DeviceAvailabeComponent implements OnChanges{
+export class DeviceAvailabeComponent implements OnInit{
+ 
   private chartdoughnut: Chart | undefined;
 
-  @Input() deviceData:any
+  deviceData:any
+  chartData:any
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (this.deviceData){
-      this.renderChart()
-    }
+  constructor(private commonService:CommonService) {}
+
+  ngOnInit(): void {
+    this.commonService.getdevicedata().subscribe({
+      next:(res)=>{
+        this.deviceData= res
+        const connected = this.deviceData.filter((e:any)=>e.connectionStatus.connected).length
+        const disconnected = this.deviceData.filter((e:any)=>e.connectionStatus.disconnected).length
+        this.chartData = {connected, disconnected}
+        this.renderChart()
+      },
+      error:(err)=>{
+        console.log(err);         
+      } 
+    })
   }
+
+
 
   renderChart(): void {
 
@@ -36,7 +52,7 @@ export class DeviceAvailabeComponent implements OnChanges{
       ],
       datasets: [{
         label: 'My First Dataset',
-        data: [300, 50],
+        data: [this.chartData?.connected, this.chartData?.disconnected],
         backgroundColor: [
           '#3ae169',
           '#dd3030',
@@ -51,12 +67,6 @@ export class DeviceAvailabeComponent implements OnChanges{
       options: {
         responsive: true,
         plugins:{
-          title:{
-            display: true,
-            text:'Device Availability',
-            align:'start',
-            color: '#333'
-          },
           legend: {
             display: true,
             position: 'bottom', 
