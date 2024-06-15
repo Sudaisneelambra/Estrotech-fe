@@ -44,14 +44,14 @@ export class DeviceAvailabeComponent implements OnInit{
     if (this.chartdoughnut) {
       this.chartdoughnut.destroy();
     }
-
+    
     const data = {
       labels: [
         'Online',
         'Offline',
       ],
       datasets: [{
-        label: 'My First Dataset',
+        label: 'Divice status',
         data: [this.chartData?.connected, this.chartData?.disconnected],
         backgroundColor: [
           '#3ae169',

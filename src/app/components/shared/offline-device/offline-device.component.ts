@@ -25,7 +25,6 @@ export class OfflineDeviceComponent implements OnInit {
               new Date(a.connectionStatus.disconnected).getTime()
           );
           
-          console.log(this.offlineDevices);
           
       },
       error: (err) => {
