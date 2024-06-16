@@ -1,9 +1,6 @@
 import {
   Component,
-  Input,
-  OnChanges,
   OnInit,
-  SimpleChanges,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -35,30 +32,13 @@ export class DeviceAvailabeComponent implements OnInit {
     this.commonService.getdevicedata().subscribe({
       next: (res) => {
         this.deviceData = res;
-        const chartdatas = this.checkConnection(this.deviceData);
+        const chartdatas = this.commonService.checkConnection(this.deviceData);
         this.renderChart(chartdatas);
       },
       error: (err) => {
         console.log(err);
       },
     });
-  }
-
-  // check the connection online or offline
-  checkConnection(data: any) {
-    let connected = 0;
-    let disconnected = 0;
-    data.forEach((element: any) => {
-      if (
-        new Date(element.connectionStatus.connected) >
-        new Date(element.connectionStatus.disconnected)
-      ) {
-        connected++;
-      } else {
-        disconnected++;
-      }
-    });
-    return [connected, disconnected];
   }
 
   // render doughnut the chart

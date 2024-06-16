@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, DoCheck, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component,  OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonService } from 'src/app/common.service';
 import { CapitalizePipe } from 'src/app/pipes/capitalize.pipe';
@@ -15,12 +15,14 @@ export class SecondNavComponent implements OnInit{
 
   route:any
   bool:any
-  constructor(private commonService:CommonService){}
+  constructor(private commonService:CommonService, private router:Router){}
 
 
   ngOnInit(): void {
     this.commonService.routeName.subscribe((val)=>{
-      this.route= val      
+      this.route= val
+      console.log(this.route);
+            
     })
   }
   
@@ -35,5 +37,9 @@ export class SecondNavComponent implements OnInit{
     }else{
       this.commonService.sidebarOpen.next(true)
     }
+  }
+
+  gotodevice(){
+    this.router.navigate(['/home/devices'])
   }
 }

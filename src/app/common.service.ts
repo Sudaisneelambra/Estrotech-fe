@@ -7,7 +7,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class CommonService {
 
-  sideBarBoolean=  new BehaviorSubject(false)
   routeName = new BehaviorSubject([])
 
   sidebarOpen = new BehaviorSubject<boolean>(false);
@@ -25,6 +24,23 @@ export class CommonService {
 
   getdevicedata():Observable<any>{
     return this.http.get('assets/data/deviceData.json')
+  }
+
+  // check the connection online or offline
+  checkConnection(data: any) {
+    let connected = 0;
+    let disconnected = 0;
+    data.forEach((element: any) => {
+      if (
+        new Date(element.connectionStatus.connected) >
+        new Date(element.connectionStatus.disconnected)
+      ) {
+        connected++;
+      } else {
+        disconnected++;
+      }
+    });
+    return [connected, disconnected];
   }
 
 }

@@ -5,6 +5,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { DevicesComponent } from './pages/devices/devices.component';
 import { HomeComponent } from './pages/home/home.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { SinglePagesComponent } from './pages/single-pages/single-pages.component';
 
 const routes: Routes = [
   {
@@ -32,6 +33,10 @@ const routes: Routes = [
       {
         path: 'devices',
         component: DevicesComponent,
+      },
+      {
+        path: 'devices/:name',
+        component: SinglePagesComponent,
       }
     ]
   },

@@ -12,9 +12,11 @@ export class DevicesComponent implements OnInit{
   constructor(private router:Router,private commonService:CommonService){}
 
   currentRoute:any
+  deviceData:any
 
   ngOnInit(): void {
     this.getCurrentRoute()
+    this.getdeviceDate()
   }
 
   getCurrentRoute() {
@@ -24,5 +26,17 @@ export class DevicesComponent implements OnInit{
       this.commonService.routeName.next(this.currentRoute)     
     }
 
+  }
+
+
+  getdeviceDate(){
+    this.commonService.getdevicedata().subscribe({
+      next:(res)=>{
+        this.deviceData=res
+      },
+      error:(err)=>{
+
+      }
+    })
   }
 }

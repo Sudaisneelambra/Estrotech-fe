@@ -21,18 +21,20 @@ export class OfflineDeviceComponent implements OnInit {
   ngOnInit(): void {
     this.commonService.getdevicedata().subscribe({
       next: (res) => {
-        res.forEach((e: any) => {
-          if (
-            new Date(e.connectionStatus.connected) <=
-            new Date(e.connectionStatus.disconnected)
-          ) {
-            this.calculateTime =
-              (new Date(e.connectionStatus.disconnected).getTime() -
-                new Date(e.connectionStatus.connected).getTime()) /
-              (1000 * 60);
-            this.offlineDevices.push(e);
-          }
-        });
+        if(res){
+          res.forEach((e: any) => {
+            if (
+              new Date(e.connectionStatus.connected) <=
+              new Date(e.connectionStatus.disconnected)
+            ) {
+              this.calculateTime =
+                (new Date(e.connectionStatus.disconnected).getTime() -
+                  new Date(e.connectionStatus.connected).getTime()) /
+                (1000 * 60);
+              this.offlineDevices.push(e);
+            }
+          });
+        }
       },
       error: (err) => {
         console.log(err);
@@ -40,10 +42,8 @@ export class OfflineDeviceComponent implements OnInit {
     });
     this.commonService.sidebarOpen.subscribe((val) => {
       this.bool = val;
-      console.log(this.bool);
       
     });
-    console.log(this.isSmallScreen);
     
     this.checkScreenSize();
   }

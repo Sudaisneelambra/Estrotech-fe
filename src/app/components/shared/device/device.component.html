@@ -1,0 +1,6 @@
+<div class="device border p-3 flex flex-col justify-between gap-1  rounded-xl " (click)="goToDetails(data?.deviceName)">
+    <h1 class="flex w-full justify-between items-center"><p>{{data?.deviceName}}</p><p class="gap-2 flex text-[14px]"><i class="fa-brands fa-usb"></i><i class="fa-solid fa-signal"></i><i class="fa-solid fa-battery-three-quarters"></i></p></h1>
+    <h1 class="flex items-center gap-2 text-[15px]"><div class="w-[17px] h-[17px] rounded-full" [style.backgroundColor]="calculateOnlineOrOffline(data).color"></div> <h1>{{calculateOnlineOrOffline(data).name}}</h1></h1>
+    <h1 class="flex items-center gap-2 text-[15px]"><i class="fa-solid fa-location-dot mr-2"></i> {{data?.location?.city}}</h1>
+    <h1 class="flex items-center gap-2 text-[15px]"><i class="fa-solid fa-sim-card mr-2"></i>Cell info</h1>
+</div>

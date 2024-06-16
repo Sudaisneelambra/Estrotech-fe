@@ -8,7 +8,6 @@ import { CommonService } from './common.service';
 })
 export class AppComponent {
 
-  constructor (private common:CommonService){}
 
   title = 'EstroTech';
 }

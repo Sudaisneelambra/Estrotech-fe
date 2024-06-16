@@ -1,0 +1,19 @@
+.device-main {
+    /* height: 100%; */
+    overflow-x: hidden;
+  }
+
+  @media (max-width: 680px) {
+    .device-main {
+      grid-template-columns: 1fr !important;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  
+  }
+
+  @media(max-width:1000px){
+    .device-main{
+        grid-template-columns: 1fr 1fr;
+    }
+  }

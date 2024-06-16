@@ -23,16 +23,20 @@ import { OfflineDeviceComponent } from './components/shared/offline-device/offli
 
 import {MatButtonModule} from '@angular/material/button';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { DeviceComponent } from './components/shared/device/device.component';
+import { SinglePagesComponent } from './pages/single-pages/single-pages.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, DashboardComponent, DevicesComponent, HomeComponent],
+  declarations: [AppComponent, LoginComponent, DashboardComponent, DevicesComponent, HomeComponent, SinglePagesComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FormsModule,
+    MatButtonModule,
+    MatSidenavModule,
     InputComponent,
     ButtonComponent,
-    FormsModule,
     ReactiveFormsModule,
     NavbarComponent,
     SecondNavComponent,
@@ -43,8 +47,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     DataPercentComponent,
     DeviceAvailabeComponent,
     OfflineDeviceComponent,
-    MatButtonModule,
-    MatSidenavModule
+    DeviceComponent
   ],
   providers: [],
   bootstrap: [AppComponent],
