@@ -6,12 +6,11 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './data-percent.component.html',
-  styleUrls: ['./data-percent.component.css']
+  styleUrls: ['./data-percent.component.css'],
 })
 export class DataPercentComponent {
-
-
-  @Input() percentage !:number
-  @Input() bground !:string
-  @Input() dataName!:string
+  // data get throught input from parent
+  @Input() percentage!: number;
+  @Input() bground!: string;
+  @Input() dataName!: string;
 }

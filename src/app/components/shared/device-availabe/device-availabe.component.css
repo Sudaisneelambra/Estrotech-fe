@@ -1,8 +1,7 @@
-
-
-  @media(max-width:400px){
-    #doughnut{
+@media (max-width: 400px) {
+  #doughnut {
     width: 230px !important;
-    height: 230px !important; 
-    }
+    height: 230px !important;
   }
+}
+

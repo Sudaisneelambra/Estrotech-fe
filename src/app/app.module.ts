@@ -12,7 +12,6 @@ import { ButtonComponent } from './components/shared/button/button.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { SecondNavComponent } from './components/shared/second-nav/second-nav.component';
 import { CapitalizePipe } from './pipes/capitalize.pipe';
-import { SideBarComponent } from './components/shared/side-bar/side-bar.component';
 import { DevicesComponent } from './pages/devices/devices.component';
 import { HomeComponent } from './pages/home/home.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
@@ -22,10 +21,11 @@ import { DataPercentComponent } from './components/shared/data-percent/data-perc
 import { DeviceAvailabeComponent } from './components/shared/device-availabe/device-availabe.component';
 import { OfflineDeviceComponent } from './components/shared/offline-device/offline-device.component';
 
-
+import {MatButtonModule} from '@angular/material/button';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, DashboardComponent, SideBarComponent, DevicesComponent, HomeComponent],
+  declarations: [AppComponent, LoginComponent, DashboardComponent, DevicesComponent, HomeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -42,7 +42,9 @@ import { OfflineDeviceComponent } from './components/shared/offline-device/offli
     NotFoundComponent,
     DataPercentComponent,
     DeviceAvailabeComponent,
-    OfflineDeviceComponent
+    OfflineDeviceComponent,
+    MatButtonModule,
+    MatSidenavModule
   ],
   providers: [],
   bootstrap: [AppComponent],

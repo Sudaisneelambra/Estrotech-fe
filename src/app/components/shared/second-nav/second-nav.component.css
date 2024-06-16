@@ -1,14 +1,14 @@
-@media(max-width:400px){
-    .second-nav{
-        padding-left: 15px;
-    }
+@media (max-width: 400px) {
+  .second-nav {
+    padding-left: 15px;
+  }
 }
 
-@media(max-width:600px){
-    .route{
-        font-size: 20px;
-    }
-    .right-arrow{
-        font-size: 20px;
-    }
+@media (max-width: 600px) {
+  .route {
+    font-size: 20px;
+  }
+  .right-arrow {
+    font-size: 20px;
+  }
 }

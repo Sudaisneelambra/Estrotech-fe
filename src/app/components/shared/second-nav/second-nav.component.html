@@ -1,7 +1,11 @@
-<nav class="second-nav w-full  h-[60px] sm:px-10 px-[25px] flex items-center gap-3 border-b-[1px] border-[#c9c7c7]">
-    <i class="fa-solid fa-bars text-[25px]" (click)="handleClick()"></i>
-    <h1 class="route text-[25px] font-normal ml-[8px]">{{ route?.[0] | capitalize}}</h1>
-    <!-- <ng-container *ngIf="Route && Route?.length > 1">
+<nav
+  class="second-nav w-full h-[60px] sm:px-10 px-[25px] flex items-center gap-3 border-b-[1px] border-[#c9c7c7]"
+>
+  <i class="fa-solid fa-bars text-[25px]" (click)="handleClick()"></i>
+  <h1 class="route text-[25px] font-normal ml-[8px]">
+    {{ route?.[0] | capitalize}}
+  </h1>
+  <!-- <ng-container *ngIf="Route && Route?.length > 1">
         <ng-container *ngFor="let rt of Route.slice(0,1)">
             <i class="right-arrow fa-solid fa-angle-right text-[25px]" ></i>
             <h1 class="route text-[25px] font-normal ml-[8px]">{{ rt | capitalize }}</h1>

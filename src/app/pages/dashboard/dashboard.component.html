@@ -1,21 +1,48 @@
-<div class="dash-board flex flex-col items-center justify-evenly mb-5">
-    <div class="first-one !w-[90%] h-[50%] flex justify-center rounded-lg border-[1px] mt-3">
-        <app-line-chart class="chart w-full h-full" [dataOne]="dataOne" [dataTwo]="dataTwo" [totalData]="totalData"></app-line-chart>
+<div class="dash-board flex flex-col items-center justify-start mb-5">
+  <div
+    class="first-one !w-[90%] h-[50%] flex justify-center rounded-lg border-[1px]"
+  >
+    <app-line-chart
+      class="chart w-full h-full"
+      [dataOne]="dataOne"
+      [dataTwo]="dataTwo"
+      [totalData]="totalData"
+    ></app-line-chart>
+  </div>
+  <div
+    class="second-one w-[90%] h-[45%] mt-5 rounded-lg gap-3"
+    [ngStyle]="getstyle()"
+  >
+    <div class="data-percent rounded-lg">
+      <app-data-percent
+        [percentage]="percentOne"
+        [dataName]="'Data - 0'"
+        [bground]="'#6975ff'"
+        class="item1"
+      ></app-data-percent>
+      <app-data-percent
+        [percentage]="percentTwo"
+        [dataName]="'Data - 1'"
+        [bground]="'#64bdc6'"
+        class="item2"
+      ></app-data-percent>
+      <app-data-percent
+        [percentage]="Totalpercent"
+        [dataName]="'Data - 2'"
+        [bground]="'#084fd7'"
+        class="item3"
+      ></app-data-percent>
     </div>
-    <div class="second-one w-[90%] h-[45%] mt-5 rounded-lg gap-3  ">
-        <div class="data-percent  rounded-lg   gap-3">
-            <app-data-percent [percentage]="percentOne" [dataName]="'Data - 0'" [bground]="'#6975ff'"></app-data-percent>
-            <app-data-percent [percentage]="percentTwo" [dataName]="'Data - 1'" [bground]="'#64bdc6'"></app-data-percent>
-            <app-data-percent [percentage]="Totalpercent" [dataName]="'Data - 2'" [bground]="'#084fd7'"></app-data-percent>
-        </div>
-        <div class="border-[1px] rounded-lg p-3 flex justify-between items-center flex-col ">
-            <h1 class="w-full text-[15px] ">Device Availability</h1>
-            <app-device-availabe ></app-device-availabe>
-        </div>
-        <div class="border-[1px] rounded-lg flex flex-col items-center">
-            <app-offline-device class=" w-[90%]"></app-offline-device>
-        </div>
+    <div
+      class="border-[1px] rounded-lg p-3 flex justify-between items-center flex-col"
+    >
+      <h1 class="w-full text-[15px]">Device Availability</h1>
+      <app-device-availabe></app-device-availabe>
     </div>
+    <div
+      class="offline-device border rounded-lg px-2"
+    >
+      <app-offline-device class="w-[90%]"></app-offline-device>
+    </div>
+  </div>
 </div>
-
-

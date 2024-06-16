@@ -10,6 +10,7 @@ export class CommonService {
   sideBarBoolean=  new BehaviorSubject(false)
   routeName = new BehaviorSubject([])
 
+  sidebarOpen = new BehaviorSubject<boolean>(false);
 
   constructor(private http:HttpClient) {}
 

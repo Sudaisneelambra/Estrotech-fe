@@ -24,15 +24,16 @@ export class SecondNavComponent implements OnInit{
     })
   }
   
-  handleClick(){    
-    this.commonService.sideBarBoolean.subscribe((val)=>{
+  // handle the side bar by clicking the menu
+  handleClick(){ 
+    this.commonService.sidebarOpen.subscribe((val)=>{
       this.bool = val
     })
-    
-    if(this.bool){
-      this.commonService.sideBarBoolean.next(false)
+
+     if(this.bool){
+      this.commonService.sidebarOpen.next(false)
     }else{
-      this.commonService.sideBarBoolean.next(true)
+      this.commonService.sidebarOpen.next(true)
     }
   }
 }
