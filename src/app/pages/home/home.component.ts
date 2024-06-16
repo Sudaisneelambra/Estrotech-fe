@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonService } from 'src/app/common.service';
 
@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router, private commonService: CommonService) {}
 
   hiddenValue!: boolean;
+  isSmallScreen: boolean = window.innerWidth < 650;
 
   buttonStyles = {
     'width': '100%',
@@ -24,11 +25,12 @@ export class HomeComponent implements OnInit {
     'outline': 'none',
     'background-color': '#fbf7fa',
   };
+  sidebarOpen: boolean = false;
 
   ngOnInit() {
     this.getCurrentRoute();
     this.commonService.sidebarOpen.subscribe((val) => {
-      this.sidebarOper = val;
+      this.sidebarOpen = val;
     });
   }
 
@@ -59,7 +61,17 @@ export class HomeComponent implements OnInit {
     this.hiddenValue = event;
   }
 
-  sidebarOper: boolean = false;
+   // listen the screen size
+   @HostListener('window:resize', ['$event'])
+   onResize(event: Event) {
+     this.checkScreenSize();
+   }
 
-  showFiller = false;
+   // check the screen size
+  private checkScreenSize() {
+    this.isSmallScreen = window.innerWidth < 650;
+  }
+ 
+
+ 
 }

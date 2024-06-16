@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { CommonService } from 'src/app/common.service';
+import {Data} from '../../data.interface'
 
 @Component({
   selector: 'app-dashboard',
@@ -14,7 +15,7 @@ export class DashboardComponent implements OnInit {
   currentRoute: any;
   dataOne: Data[] = [];
   dataTwo: Data[] = [];
-  totalData: Data[] = [];
+  totalData: any;
 
   bool!: boolean;
   isSmallScreen: boolean = window.innerWidth < 1050;
@@ -67,23 +68,15 @@ export class DashboardComponent implements OnInit {
       next: (res) => {
         this.dataOne = res.dataOne;
         this.dataTwo = res.dataTwo;
-        this.calculateTotalData();
+        this.totalData = this.commonService.calculateTotalData(this.dataOne, this.dataTwo)
+        if(this.totalData && this.totalData?.length>0){
+          this.calculatePercentage();
+        }
       },
       error: (err) => {
         console.log(err);
       },
     });
-  }
-
-  // calculate total of data one and data two
-  calculateTotalData() {
-    if (this.dataOne.length && this.dataTwo.length) {
-      this.totalData = this.dataOne.map((dataOne, index) => ({
-        hour: dataOne.hour,
-        data: dataOne.data + (this.dataTwo[index]?.data || 0),
-      }));
-    }
-    this.calculatePercentage();
   }
 
   // get correct route
@@ -117,7 +110,4 @@ export class DashboardComponent implements OnInit {
   }
 }
 
-interface Data {
-  hour: number;
-  data: number;
-}
+

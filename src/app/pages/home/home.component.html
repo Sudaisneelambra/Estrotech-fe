@@ -1,14 +1,26 @@
 <app-navbar></app-navbar>
 <app-second-nav (booleanValue)="booleanEvent($event)"></app-second-nav>
 <section class="w-full">
-  <mat-drawer-container class="main-container" autosize>
-    <mat-drawer #drawer class="side-sidenav" mode="side" [opened]="sidebarOper">
-      <app-button [buttonStyles]="buttonStyles" (click)="goToDashboard()"
-        >Dashboard</app-button
+  <mat-drawer-container class="main-container" autosize >
+    <mat-drawer #drawer class="side-sidenav" mode="side" [opened]="sidebarOpen">
+      <app-button class="Dashboard-button " [buttonStyles]="buttonStyles" (click)="goToDashboard()"
+      *ngIf="!isSmallScreen ;else icon"   
+      >Dashboard</app-button
       >
-      <app-button [buttonStyles]="buttonStyles" (click)="goToDevices()"
-        >Devices</app-button
+      <ng-template #icon>
+        <div class="w-full py-[30px] flex justify-center items-center" (click)="goToDashboard()">
+            <img src="/assets/images/dashboard (1).png" alt="" class="w-[70%]">
+        </div>
+      </ng-template>
+      <app-button class="device-button" [buttonStyles]="buttonStyles" (click)="goToDevices()"
+      *ngIf="!isSmallScreen; else icons"  
+      >Devices</app-button
       >
+      <ng-template #icons>
+        <div class="w-full py-[30px] flex justify-center items-center" (click)="goToDevices()">
+            <img src="/assets/images/responsive.png" alt="" class="w-[70%]">
+        </div>
+    </ng-template>
     </mat-drawer>
 
     <div class="sidenav-content">

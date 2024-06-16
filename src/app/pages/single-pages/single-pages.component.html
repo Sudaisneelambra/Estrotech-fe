@@ -1,1 +1,53 @@
-<p>single-pages works!</p>
+<div class=" flex flex-col items-center  gap-5">
+    <div class="single-data  w-[90%] py-3 gap-2 ">
+        <div class="border p-9  rounded-lg">
+            sjdgah
+        </div>
+        <div class="border p-9  rounded-lg">
+            sjdgah
+        </div>
+        <div class="border p-9  rounded-lg">
+            sjdgah
+        </div>
+        <div class="border p-9  rounded-lg">
+            sjdgah
+        </div>
+    </div>
+    <div
+    class="first-one !w-[90%] !h-[400px] flex justify-center rounded-lg border-[1px] "
+  >
+    <app-line-chart
+      class="chart w-full h-full"
+      [dataOne]="dataOne"
+      [dataTwo]="dataTwo"
+      [totalData]="totalData"
+    ></app-line-chart>
+  </div>
+
+  <div class="data-percent rounded-lg  w-[90%]">
+    <app-data-percent
+      [percentage]="percentOne"
+      [dataName]="'Data - 0'"
+      [bground]="'#6975ff'"
+      class="item1"
+    ></app-data-percent>
+    <app-data-percent
+      [percentage]="percentTwo"
+      [dataName]="'Data - 1'"
+      [bground]="'#64bdc6'"
+      class="item2"
+    ></app-data-percent>
+    <app-data-percent
+      [percentage]="Totalpercent"
+      [dataName]="'Data - 2'"
+      [bground]="'#084fd7'"
+      class="item3"
+    ></app-data-percent>
+  </div>
+  <div class="w-[90%] p-[55px] border-2 rounded-lg">
+    <h1>sdhgjhfk</h1>
+  </div>
+</div>
+
+
+<!-- [ngStyle]="getstyle()" -->
