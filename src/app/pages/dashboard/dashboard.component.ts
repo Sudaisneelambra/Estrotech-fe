@@ -10,9 +10,9 @@ import {Data} from '../../data.interface'
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
+
   constructor(private router: Router, private commonService: CommonService) {}
 
-  currentRoute: any;
   dataOne: Data[] = [];
   dataTwo: Data[] = [];
   totalData: any;
@@ -28,14 +28,14 @@ export class DashboardComponent implements OnInit {
   target = 2000;
 
   ngOnInit(): void {
-    this.getCurrentRoute();
+    this.commonService.getCurrentRoute(this.router.url);
     this.loadData();
     this.commonService.sidebarOpen.subscribe((val) => {
       this.bool = val;
     });
-
     this.checkScreenSize();
   }
+
 
   // add style based on condition
   getstyle() {
@@ -59,6 +59,7 @@ export class DashboardComponent implements OnInit {
     this.isSmallScreen = window.innerWidth < 1050;
   }
 
+  
   // get all data 
   loadData() {
     forkJoin({
@@ -70,7 +71,12 @@ export class DashboardComponent implements OnInit {
         this.dataTwo = res.dataTwo;
         this.totalData = this.commonService.calculateTotalData(this.dataOne, this.dataTwo)
         if(this.totalData && this.totalData?.length>0){
-          this.calculatePercentage();
+          const perc =this.commonService.calculatePercentage(this.dataOne,this.dataTwo,this.totalData,this.target);
+          if(perc){
+            this.percentOne = perc?.percentOne
+            this.percentTwo = perc?.percentTwo
+            this.Totalpercent = perc?.Totalpercent
+          }
         }
       },
       error: (err) => {
@@ -79,35 +85,7 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  // get correct route
-  getCurrentRoute() {
-    if (this.router.url) {
-      this.currentRoute = this.router.url
-        .replace('/', '')
-        .split('/')
-        .filter((segment: any) => segment !== 'home');
-      this.commonService.routeName.next(this.currentRoute);
-    }
-  }
-
-  // calculate percentage of dataOne , dataTwo, dataThree for progress bar
-  calculatePercentage() {
-    const totalData = this.totalData.reduce((acc: number, curr: Data) => {
-      return (acc += curr.data);
-    }, 0);
-
-    const data0 = this.dataOne.reduce((acc: number, curr: Data) => {
-      return (acc += curr.data);
-    }, 0);
-
-    const data1 = this.dataTwo.reduce((acc: number, curr: Data) => {
-      return (acc += curr.data);
-    }, 0);
-
-    this.percentOne = Math.round((data0 / totalData) * 100);
-    this.percentTwo = Math.round((data1 / totalData) * 100);
-    this.Totalpercent = Math.round((totalData / this.target) * 100);
-  }
+ 
 }
 
 

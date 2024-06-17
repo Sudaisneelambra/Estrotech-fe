@@ -1,7 +1,68 @@
+// import { Component, OnInit } from '@angular/core';
+// import { CommonModule } from '@angular/common';
+// import { CommonService } from 'src/app/common.service';
+
+// @Component({
+//   selector: 'app-up-time-data',
+//   standalone: true,
+//   imports: [CommonModule],
+//   templateUrl: './up-time-data.component.html',
+//   styleUrls: ['./up-time-data.component.css']
+// })
+// export class UpTimeDataComponent implements OnInit{
+  
+//   numbers: number[] = Array(24).fill(0).map((x, i) => i+1);
+
+//   totalData:any
+//   onlineTime:any
+//   offlineTime:any
+  
+//   constructor(private commonServive:CommonService) {}
+  
+//   ngOnInit(): void {
+
+//       this.commonServive.getUptimeData().subscribe({
+//         next:(res)=>{
+//           this.totalData= res
+//           if(this.totalData){
+//             this.totalData.map((e:any)=>{
+//               if(e.event==='connected'){
+//                 this.onlineTime= e.duration/3600
+//               } else if(e.event==='disconnected'){
+//                 this.offlineTime= e.duration/3600
+//               }
+//             })
+//           }
+//         },
+//         error:(err)=>{
+//           console.log(err);
+          
+//         }
+//       })
+      
+//   }
+
+//   getOnlineWidth(){
+//     if(this.onlineTime){
+//       return Math.round((this.onlineTime/23)*100)
+//     }
+//     return
+//   }
+
+//   getOfflineWidth(){
+//     if(this.offlineTime){
+//       const onlinepercentage = Math.round((this.onlineTime/23)*100)
+//       const oflinepercentage = Math.round((this.offlineTime/23)*100)      
+//       return (onlinepercentage+oflinepercentage)
+//     }
+//     return
+//   }
+// }
+
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CommonService } from 'src/app/common.service';
-
+import {Chart, ChartConfiguration, ChartItem} from 'node_modules/chart.js'
 @Component({
   selector: 'app-up-time-data',
   standalone: true,
@@ -9,52 +70,65 @@ import { CommonService } from 'src/app/common.service';
   templateUrl: './up-time-data.component.html',
   styleUrls: ['./up-time-data.component.css']
 })
-export class UpTimeDataComponent implements OnInit{
+export class UpTimeDataComponent {
   
   numbers: number[] = Array(24).fill(0).map((x, i) => i+1);
 
-  totalData:any
-  onlineTime:any
-  offlineTime:any
-  
-  constructor(private commonServive:CommonService) {}
-  
-  ngOnInit(): void {
 
-      this.commonServive.getUptimeData().subscribe({
-        next:(res)=>{
-          this.totalData= res
-          if(this.totalData){
-            this.totalData.map((e:any)=>{
-              if(e.event==='connected'){
-                this.onlineTime= e.duration/3600
-              } else if(e.event==='disconnected'){
-                this.offlineTime= e.duration/3600
-              }
-            })
+  data = {
+    labels: ['Status'],
+    datasets: [{
+      label: 'Online',
+      data: [3],
+      backgroundColor: [
+        'red'
+      ],
+    },
+    {
+      label: 'Offline',
+      data: [14],
+      backgroundColor: [
+        'green',
+      ],
+    },
+    {
+      label: 'total',
+      data: [20],
+      backgroundColor: [
+        'gray',
+      ],
+    }]
+  };
+
+  config:ChartConfiguration <'bar'>= {
+    type: 'bar',
+    data:this.data,
+    options: {
+      responsive: true,
+      indexAxis:'y',
+      aspectRatio:6,
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 23,
+          stacked: true,
+          ticks: {
+            stepSize: 1 
           }
-        },
-        error:(err)=>{
-          console.log(err);
-          
         }
-      })
-      
+      }
+    }
+  };
+
+  ngOnInit() {
+    this.createChart();
   }
 
-  getOnlineWidth(){
-    if(this.onlineTime){
-      return Math.round((this.onlineTime/24)*100)
-    }
-    return
+  createChart() {
+    const chartItem = document.getElementById('myChart') as ChartItem;
+    new Chart(chartItem, this.config);
   }
 
-  getOfflineWidth(){
-    if(this.offlineTime){
-      const onlinepercentage = Math.round((this.onlineTime/24)*100)
-      const oflinepercentage = Math.round((this.offlineTime/24)*100)      
-      return (onlinepercentage+oflinepercentage)
-    }
-    return
-  }
 }
+
+

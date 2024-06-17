@@ -28,7 +28,7 @@ export class DeviceAvailabeComponent implements OnInit {
   constructor(private commonService: CommonService) {}
 
   ngOnInit(): void {
-    // tota device data getting
+    // total device data getting
     this.commonService.getdevicedata().subscribe({
       next: (res) => {
         this.deviceData = res;

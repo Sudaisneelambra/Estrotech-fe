@@ -38,6 +38,8 @@ export class SecondNavComponent implements OnInit{
   }
 
   gotodevice(){
-    this.router.navigate(['/home/devices'])
+    if(this.route?.[0]==='devices'){
+      this.router.navigate(['/home/devices'])
+    }
   }
 }

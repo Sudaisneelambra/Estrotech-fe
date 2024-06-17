@@ -24,16 +24,7 @@ export class UserHomeComponent {
   constructor(private router:Router, private commonService:CommonService){}
 
   ngOnInit(){
-    this.getCurrentRoute()
-  }
-
-  getCurrentRoute() {
-
-    if(this.router.url){
-      this.currentRoute = this.router.url.replace('/', '').split('/').filter((segment:any) => segment !== 'home')
-      this.commonService.routeName.next(this.currentRoute)     
-    }
-
+    this.commonService.getCurrentRoute(this.router.url)
   }
 
   gotoEstroWebpage(){

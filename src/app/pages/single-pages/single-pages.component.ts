@@ -32,7 +32,7 @@ export class SinglePagesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getCurrentRoute();
+    this.commonService.getCurrentRoute(this.router.url);
     this.route.params.subscribe((val) => {
       if (val) {
         this.deviceName = val['name'];
@@ -60,18 +60,6 @@ export class SinglePagesComponent implements OnInit {
     })
   }
 
-  // get correct route
-  getCurrentRoute() {
-    if (this.router.url) {
-      this.currentRoute = this.router.url
-        .replace('/', '')
-        .split('/')
-        .filter((segment: any) => segment !== 'home');
-
-      this.commonService.routeName.next(this.currentRoute);
-    }
-  }
-
   // get all data
   loadData() {
     forkJoin({
@@ -86,7 +74,12 @@ export class SinglePagesComponent implements OnInit {
           this.dataTwo
         );
         if (this.totalData && this.totalData?.length > 0) {
-          this.calculatePercentage();
+         const perc = this.commonService.calculatePercentage(this.dataOne,this.dataTwo,this.totalData, this.target);
+         if(perc){
+          this.percentOne = perc?.percentOne
+          this.percentTwo = perc?.percentTwo
+          this.Totalpercent = perc?.Totalpercent
+         }
         }
       },
       error: (err) => {
@@ -96,22 +89,4 @@ export class SinglePagesComponent implements OnInit {
   }
   
 
-  // calculate percentage of dataOne , dataTwo, dataThree for progress bar
-  calculatePercentage() {
-    const totalData = this.totalData.reduce((acc: number, curr: Data) => {
-      return (acc += curr.data);
-    }, 0);
-
-    const data0 = this.dataOne.reduce((acc: number, curr: Data) => {
-      return (acc += curr.data);
-    }, 0);
-
-    const data1 = this.dataTwo.reduce((acc: number, curr: Data) => {
-      return (acc += curr.data);
-    }, 0);
-
-    this.percentOne = Math.round((data0 / totalData) * 100);
-    this.percentTwo = Math.round((data1 / totalData) * 100);
-    this.Totalpercent = Math.round((totalData / this.target) * 100);
-  }
 }

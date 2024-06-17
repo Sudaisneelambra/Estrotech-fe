@@ -7,8 +7,8 @@ import { Data } from './data.interface';
   providedIn: 'root',
 })
 export class CommonService {
-  routeName = new BehaviorSubject([]);
 
+  routeName = new BehaviorSubject([]);
   sidebarOpen = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) {}
@@ -23,6 +23,10 @@ export class CommonService {
 
   getdevicedata(): Observable<any> {
     return this.http.get('assets/data/deviceData.json');
+  }
+
+  getUptimeData():Observable<any>{
+    return this.http.get('assets/data/uptimeData.json')
   }
 
   // check the connection online or offline
@@ -42,6 +46,7 @@ export class CommonService {
     return [connected, disconnected];
   }
 
+
   // calculate total of data one and data two
   calculateTotalData(dataOne: Data[], dataTwo: Data[]) {
     if (dataOne.length && dataTwo.length) {
@@ -54,7 +59,39 @@ export class CommonService {
     return;
   }
 
-  getUptimeData():Observable<any>{
-    return this.http.get('assets/data/uptimeData.json')
+   // get correct route
+   getCurrentRoute(route:any) {
+    if (route) {
+      const currentRoute = route
+        .replace('/', '')
+        .split('/')
+        .filter((segment: any) => segment !== 'home');
+      this.routeName.next(currentRoute);
+    }
+  }
+
+   // calculate percentage of dataOne , dataTwo, dataThree for progress bar
+   calculatePercentage(dataone:any,datatwo:any,total:any,target:any) {
+    const totalData = total.reduce((acc: number, curr: Data) => {
+      return (acc += curr.data);
+    }, 0);
+
+    const data0 = dataone.reduce((acc: number, curr: Data) => {
+      return (acc += curr.data);
+    }, 0);
+
+    const data1 = datatwo.reduce((acc: number, curr: Data) => {
+      return (acc += curr.data);
+    }, 0);
+
+    const percentOne = Math.round((data0 / totalData) * 100);
+    const percentTwo = Math.round((data1 / totalData) * 100);
+    const Totalpercent = Math.round((totalData / target) * 100);
+
+    return {
+      percentOne,
+      percentTwo,
+      Totalpercent,
+    }
   }
 }
