@@ -8,7 +8,6 @@ import { CommonService } from 'src/app/common.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  currentRoute: any;
 
   constructor(private router: Router, private commonService: CommonService) {}
 
@@ -28,7 +27,6 @@ export class HomeComponent implements OnInit {
   sidebarOpen: boolean = false;
 
   ngOnInit() {
-    this.getCurrentRoute();
     this.commonService.sidebarOpen.subscribe((val) => {
       this.sidebarOpen = val;
     });
@@ -44,17 +42,6 @@ export class HomeComponent implements OnInit {
   goToDevices() {
     this.router.navigate(['/home/devices']);
     this.commonService.sidebarOpen.next(false);
-  }
-
-  // get corrent route
-  getCurrentRoute() {
-    if (this.router.url) {
-      this.currentRoute = this.router.url;
-      this.currentRoute = this.currentRoute.replace('/', '');
-      this.currentRoute = this.currentRoute
-        .split('/')
-        .filter((segment: any) => segment !== 'home');
-    }
   }
 
   booleanEvent(event: any) {

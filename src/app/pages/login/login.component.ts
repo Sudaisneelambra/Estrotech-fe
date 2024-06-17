@@ -21,10 +21,10 @@ export class LoginComponent {
 
   buttonStyles = {
     'background-color': '#3b3379',
-    color: 'white',
+    'color': 'white',
     'font-weight': 'bold',
     'border-radius': '5px',
-    padding: '23px 30px',
+    'padding': '23px 30px',
     'font-size': '20px',
   };
 

@@ -25,9 +25,12 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { DeviceComponent } from './components/shared/device/device.component';
 import { SinglePagesComponent } from './pages/single-pages/single-pages.component';
+import { DeviceDetailsComponent } from './components/shared/device-details/device-details.component';
+import { UpTimeDataComponent } from './components/shared/up-time-data/up-time-data.component';
+import { UserHomeComponent } from './pages/user-home/user-home.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, DashboardComponent, DevicesComponent, HomeComponent, SinglePagesComponent],
+  declarations: [AppComponent, LoginComponent, DashboardComponent, DevicesComponent, HomeComponent, SinglePagesComponent, UserHomeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -47,7 +50,9 @@ import { SinglePagesComponent } from './pages/single-pages/single-pages.componen
     DataPercentComponent,
     DeviceAvailabeComponent,
     OfflineDeviceComponent,
-    DeviceComponent
+    DeviceComponent,
+    DeviceDetailsComponent,
+    UpTimeDataComponent
   ],
   providers: [],
   bootstrap: [AppComponent],

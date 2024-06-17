@@ -1,0 +1,11 @@
+@media(max-width:720px){
+    .percent{
+        width: 90%;
+    }
+    .line{
+        width: 90%;
+    }
+    .count{
+        font-size: 9px;
+    }
+}

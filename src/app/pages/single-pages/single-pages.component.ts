@@ -15,11 +15,15 @@ export class SinglePagesComponent implements OnInit {
   dataOne: Data[] = [];
   dataTwo: Data[] = [];
   totalData: any;
+  device:any
+
+  deviceData:any
 
   percentOne: any;
   percentTwo: any;
   Totalpercent: any;
   target: number = 2000;
+
 
   constructor(
     private router: Router,
@@ -35,6 +39,25 @@ export class SinglePagesComponent implements OnInit {
       }
     });
     this.loadData();
+    this.getDeviceData()
+    
+  }
+
+  getDeviceData(){
+    this.commonService.getdevicedata().subscribe({
+      next:(res)=>{
+        this.deviceData=res
+        if(this.deviceData){
+          this.device = this.deviceData.find((e:any)=>{
+            return e.deviceName?.replace(/\s+/g, '') === this.deviceName
+          })  
+        }
+      },
+      error:(err)=>{
+        console.log(err);
+        
+      }
+    })
   }
 
   // get correct route
@@ -71,6 +94,7 @@ export class SinglePagesComponent implements OnInit {
       },
     });
   }
+  
 
   // calculate percentage of dataOne , dataTwo, dataThree for progress bar
   calculatePercentage() {

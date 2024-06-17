@@ -20,9 +20,7 @@ export class SecondNavComponent implements OnInit{
 
   ngOnInit(): void {
     this.commonService.routeName.subscribe((val)=>{
-      this.route= val
-      console.log(this.route);
-            
+      this.route= val            
     })
   }
   

@@ -15,4 +15,8 @@ export class NavbarComponent {
   gotoEstroWebpage(){
     window.location.href = 'https://www.estrotech.in';
   }
+
+  gotoUserProfile(){
+    this.router.navigate(['/home/userDetails']);
+  }
 }

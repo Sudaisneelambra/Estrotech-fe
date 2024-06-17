@@ -1,8 +1,3 @@
-.single-data {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-}
-
 .data-percent {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -25,12 +20,5 @@
   }
   .data-percent {
     gap: 10px;
-  }
- 
-}
-
-@media (max-width: 1000px) {
-  .single-data {
-    grid-template-columns: 1fr 1fr;
   }
 }

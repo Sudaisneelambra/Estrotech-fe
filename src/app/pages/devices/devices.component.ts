@@ -35,7 +35,8 @@ export class DevicesComponent implements OnInit{
         this.deviceData=res
       },
       error:(err)=>{
-
+        console.log(err);
+        
       }
     })
   }

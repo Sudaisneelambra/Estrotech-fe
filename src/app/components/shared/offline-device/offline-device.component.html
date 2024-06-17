@@ -1,25 +1,25 @@
-<div class="w-[100%] flex flex-col gap-3 py-3 ">
-  <h1 class="">Offline Devices</h1>
-  <div
-    class="w-full border p-3 rounded-lg flex items-center justify-between text-[16px]"
-    [ngStyle]="getstye()"
-    *ngFor="let dt of offlineDevices"
-  >
-    <div class="">
-      <h1 class="">{{ dt?.deviceName }}</h1>
-      <h1 class="font-thin">
-        <i class="fa-solid fa-location-dot mr-2"></i> {{ dt?.location?.city }}
+<div class="w-[100%] flex flex-col items-center gap-3 border2 py-3">
+  <div class="w-[90%] flex flex-col items-center justify-center gap-3">
+    <h1 class="w-full text-start">Offline Devices</h1>
+    <div
+      class="w-full border p-3 rounded-lg flex items-center justify-between text-[16px]"
+      [ngStyle]="getstye()"
+      *ngFor="let dt of offlineDevices"
+    >
+      <div class="">
+        <h1 class="">{{ dt?.deviceName }}</h1>
+        <h1 class="font-thin">
+          <i class="fa-solid fa-location-dot mr-2"></i> {{ dt?.location?.city }}
+        </h1>
+      </div>
+      <h1>
+        {{
+          calculateTime.toString().length > 1
+            ? calculateTime
+            : "0" + calculateTime
+        }}
+        minutes
       </h1>
     </div>
-    <h1>
-      {{
-        calculateTime.toString().length > 1
-          ? calculateTime
-          : "0" + calculateTime
-      }}
-      minutes
-    </h1>
   </div>
-
-
 </div>

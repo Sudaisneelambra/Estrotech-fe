@@ -6,6 +6,7 @@ import { DevicesComponent } from './pages/devices/devices.component';
 import { HomeComponent } from './pages/home/home.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { SinglePagesComponent } from './pages/single-pages/single-pages.component';
+import { UserHomeComponent } from './pages/user-home/user-home.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,10 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardComponent,
+      },
+      {
+        path: 'userDetails',
+        component: UserHomeComponent,
       },
       {
         path: 'devices',
