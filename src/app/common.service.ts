@@ -54,7 +54,6 @@ export class CommonService {
         hour: dataOne.hour,
         data: dataOne.data + (dataTwo[index]?.data || 0),
       }));
-      console.log(totalData);
       
       return totalData;
     }
@@ -74,21 +73,28 @@ export class CommonService {
 
    // calculate percentage of dataOne , dataTwo, dataThree for progress bar
    calculatePercentage(dataone:any,datatwo:any,total:any,target:any) {
+    console.log(target);
+    
     const totalData = total.reduce((acc: number, curr: Data) => {
       return (acc += curr.data);
     }, 0);
+    
 
     const data0 = dataone.reduce((acc: number, curr: Data) => {
       return (acc += curr.data);
     }, 0);
 
+    
     const data1 = datatwo.reduce((acc: number, curr: Data) => {
       return (acc += curr.data);
     }, 0);
+    
 
     const percentOne = Math.round((data0 / totalData) * 100);
+    
     const percentTwo = Math.round((data1 / totalData) * 100);
     const Totalpercent = Math.round((totalData / target) * 100);
+    
 
     return {
       percentOne,
