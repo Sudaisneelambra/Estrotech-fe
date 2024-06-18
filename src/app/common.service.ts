@@ -54,6 +54,8 @@ export class CommonService {
         hour: dataOne.hour,
         data: dataOne.data + (dataTwo[index]?.data || 0),
       }));
+      console.log(totalData);
+      
       return totalData;
     }
     return;

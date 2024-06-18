@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrls: ['./button.component.css'],
 })
 export class ButtonComponent {
+  
   // style through selectors
   @Input() buttonStyles!: { [key: string]: string };
 }

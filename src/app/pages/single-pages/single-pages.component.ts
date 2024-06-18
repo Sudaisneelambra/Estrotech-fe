@@ -15,6 +15,7 @@ export class SinglePagesComponent implements OnInit {
   dataOne: Data[] = [];
   dataTwo: Data[] = [];
   totalData: any;
+  uptimeTotalData:any
   device:any
 
   deviceData:any
@@ -24,6 +25,8 @@ export class SinglePagesComponent implements OnInit {
   Totalpercent: any;
   target: number = 2000;
 
+  onlineTime:any
+  offlineTime:any
 
   constructor(
     private router: Router,
@@ -40,7 +43,7 @@ export class SinglePagesComponent implements OnInit {
     });
     this.loadData();
     this.getDeviceData()
-    
+    this.getUpTimeData()
   }
 
   getDeviceData(){
@@ -69,10 +72,13 @@ export class SinglePagesComponent implements OnInit {
       next: (res) => {
         this.dataOne = res.dataOne;
         this.dataTwo = res.dataTwo;
-        this.totalData = this.commonService.calculateTotalData(
+        
+        const total = this.commonService.calculateTotalData(
           this.dataOne,
           this.dataTwo
         );
+        this.totalData = total
+        
         if (this.totalData && this.totalData?.length > 0) {
          const perc = this.commonService.calculatePercentage(this.dataOne,this.dataTwo,this.totalData, this.target);
          if(perc){
@@ -88,5 +94,26 @@ export class SinglePagesComponent implements OnInit {
     });
   }
   
+  // getuptimeData
+  getUpTimeData(){
+    this.commonService.getUptimeData().subscribe({
+              next:(res)=>{
+                this.uptimeTotalData= res
+                if(this.uptimeTotalData){
+                  this.uptimeTotalData.map((e:any)=>{
+                    if(e.event==='connected'){
+                      this.onlineTime= e.duration/3600
+                    } else if(e.event==='disconnected'){
+                      this.offlineTime= e.duration/3600
+                    }
+                  })
+                }
+              },
+              error:(err)=>{
+                console.log(err);
+                
+              }
+            })
+  }
 
 }

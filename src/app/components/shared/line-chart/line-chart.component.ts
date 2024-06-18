@@ -5,6 +5,7 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
+import { Data } from 'src/app/data.interface';
 
 import {
   Chart,
@@ -12,6 +13,7 @@ import {
   registerables,
 } from 'node_modules/chart.js';
 Chart.register(...registerables);
+
 
 @Component({
   selector: 'app-line-chart',
@@ -25,6 +27,7 @@ export class LineChartComponent implements OnInit, OnChanges {
   @Input() dataOne: Data[] = [];
   @Input() dataTwo: Data[] = [];
   @Input() totalData: Data[] = [];
+
   private chart: Chart | undefined;
 
   // rendering chart when the data get
@@ -34,6 +37,9 @@ export class LineChartComponent implements OnInit, OnChanges {
       this.dataTwo.length > 0 &&
       this.totalData.length > 0
     ) {
+      console.log(this.dataOne);
+      console.log(this.dataTwo);
+      console.log(this.totalData);
       this.renderChart();
     }
   }
@@ -142,9 +148,4 @@ export class LineChartComponent implements OnInit, OnChanges {
 
     this.chart = new Chart(ctx, config);
   }
-}
-
-interface Data {
-  hour: number;
-  data: number;
 }

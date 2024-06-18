@@ -2,9 +2,10 @@
   <div class="w-[90%] flex flex-col items-center justify-center gap-3">
     <h1 class="w-full text-start">Offline Devices</h1>
     <div
-      class="w-full border p-3 rounded-lg flex items-center justify-between text-[16px]"
+      class="w-full border p-3 rounded-lg flex items-center justify-between text-[16px] cursor-pointer"
       [ngStyle]="getstye()"
       *ngFor="let dt of offlineDevices"
+      (click)="gotoOfflineDevice(dt?.deviceName)"
     >
       <div class="">
         <h1 class="">{{ dt?.deviceName }}</h1>
@@ -14,11 +15,9 @@
       </div>
       <h1>
         {{
-          calculateTime.toString().length > 1
-            ? calculateTime
-            : "0" + calculateTime
+          timeCalculation(calculateTime)
         }}
-        minutes
+        ago
       </h1>
     </div>
   </div>

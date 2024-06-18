@@ -1,67 +1,7 @@
-// import { Component, OnInit } from '@angular/core';
-// import { CommonModule } from '@angular/common';
-// import { CommonService } from 'src/app/common.service';
 
-// @Component({
-//   selector: 'app-up-time-data',
-//   standalone: true,
-//   imports: [CommonModule],
-//   templateUrl: './up-time-data.component.html',
-//   styleUrls: ['./up-time-data.component.css']
-// })
-// export class UpTimeDataComponent implements OnInit{
-  
-//   numbers: number[] = Array(24).fill(0).map((x, i) => i+1);
 
-//   totalData:any
-//   onlineTime:any
-//   offlineTime:any
-  
-//   constructor(private commonServive:CommonService) {}
-  
-//   ngOnInit(): void {
-
-//       this.commonServive.getUptimeData().subscribe({
-//         next:(res)=>{
-//           this.totalData= res
-//           if(this.totalData){
-//             this.totalData.map((e:any)=>{
-//               if(e.event==='connected'){
-//                 this.onlineTime= e.duration/3600
-//               } else if(e.event==='disconnected'){
-//                 this.offlineTime= e.duration/3600
-//               }
-//             })
-//           }
-//         },
-//         error:(err)=>{
-//           console.log(err);
-          
-//         }
-//       })
-      
-//   }
-
-//   getOnlineWidth(){
-//     if(this.onlineTime){
-//       return Math.round((this.onlineTime/23)*100)
-//     }
-//     return
-//   }
-
-//   getOfflineWidth(){
-//     if(this.offlineTime){
-//       const onlinepercentage = Math.round((this.onlineTime/23)*100)
-//       const oflinepercentage = Math.round((this.offlineTime/23)*100)      
-//       return (onlinepercentage+oflinepercentage)
-//     }
-//     return
-//   }
-// }
-
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CommonService } from 'src/app/common.service';
 import {Chart, ChartConfiguration, ChartItem} from 'node_modules/chart.js'
 @Component({
   selector: 'app-up-time-data',
@@ -71,62 +11,95 @@ import {Chart, ChartConfiguration, ChartItem} from 'node_modules/chart.js'
   styleUrls: ['./up-time-data.component.css']
 })
 export class UpTimeDataComponent {
-  
-  numbers: number[] = Array(24).fill(0).map((x, i) => i+1);
 
+  @Input() online:any
+  @Input() offline:any
 
-  data = {
-    labels: ['Status'],
-    datasets: [{
-      label: 'Online',
-      data: [3],
-      backgroundColor: [
-        'red'
-      ],
-    },
-    {
-      label: 'Offline',
-      data: [14],
-      backgroundColor: [
-        'green',
-      ],
-    },
-    {
-      label: 'total',
-      data: [20],
-      backgroundColor: [
-        'gray',
-      ],
-    }]
-  };
-
-  config:ChartConfiguration <'bar'>= {
-    type: 'bar',
-    data:this.data,
-    options: {
-      responsive: true,
-      indexAxis:'y',
-      aspectRatio:6,
-      scales: {
-        y: {
-          beginAtZero: true,
-          max: 23,
-          stacked: true,
-          ticks: {
-            stepSize: 1 
-          }
-        }
-      }
+  ngOnChanges(){
+    if(this.offline && this.online){
+      this.createChart();
     }
-  };
-
-  ngOnInit() {
-    this.createChart();
   }
 
   createChart() {
-    const chartItem = document.getElementById('myChart') as ChartItem;
-    new Chart(chartItem, this.config);
+
+    const data = {
+      labels: ['Status'],
+      datasets: [{
+        label: 'Online',
+        data: [this.online],
+        backgroundColor: [
+          '#3ae169'
+        ],
+        borderRadius: 10,
+        barThickness: 50 
+      },
+      {
+        label: 'Offline',
+        data: [this.offline],
+        backgroundColor: [
+          '#dd3030',
+        ],
+        borderRadius: 10,
+        barThickness: 50 
+      },
+      {
+        label: 'total',
+        data: [23],
+        backgroundColor: [
+          '#d9d9d9',
+        ],
+        borderRadius: 10,
+        barThickness: 50 
+      }]
+    };
+
+    const config:ChartConfiguration <'bar'>= {
+      type: 'bar',
+      data:data,
+      options: {
+        responsive: true,
+        indexAxis:'y',
+        aspectRatio:10,
+        scales: {
+          y: {
+            display: false,
+            stacked: true,
+            ticks: {
+              stepSize: 1
+            }
+          },
+          x:{
+            beginAtZero: true,
+            max: 23,
+            stacked: true,
+            ticks: {
+              stepSize: 1 
+            },
+            grid: {
+              display: false 
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          }
+        },
+        layout:{
+          padding:{
+            top:0,
+            left:0,
+            right:0,
+            bottom:0
+          }
+        }
+        
+      }
+    };
+
+    const chartItem = document.getElementById('bar') as ChartItem;
+    new Chart(chartItem, config);
   }
 
 }
