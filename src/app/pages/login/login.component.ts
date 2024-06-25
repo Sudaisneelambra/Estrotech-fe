@@ -19,6 +19,9 @@ export class LoginComponent {
     password: '',
   };
 
+
+  name:string='sudais'
+
   buttonStyles = {
     'background-color': '#3b3379',
     'color': 'white',

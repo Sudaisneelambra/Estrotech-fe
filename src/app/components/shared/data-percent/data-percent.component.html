@@ -7,7 +7,7 @@
     <h1 class="w-[90%] text-right">{{ percentage }}%</h1>
     <div class="w-[90%] h-[35px] rounded-[5px] bg-[#d9d9d9] overflow-hidden">
       <div
-        class="h-full bg-[#6975ff]"
+        class="h-full bg-[#6975ff] transition-width duration-1000"
         [ngStyle]="{ width: percentage + '%', 'background-color': bground }"
       ></div>
     </div>
